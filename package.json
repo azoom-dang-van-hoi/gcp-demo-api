@@ -1,0 +1,27 @@
+{
+  "name": "gcp-demo-api",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:azoom-dang-van-hoi/gcp-demo-api.git",
+  "author": "azoom-dang-van-hoi <dang.van.hoi@azoom.jp>",
+  "license": "MIT",
+  "scripts": {
+    "dev": "env $(grep -v '^#' .env) nodemon index",
+    "start": "env $(grep -v '^#' .env) node index",
+    "staging:clean": "git fetch origin --prune 'refs/tags/*:refs/tags/*' && git push origin --delete $(git tag -l 'staging-*') || true && git fetch origin --prune 'refs/tags/*:refs/tags/*'",
+    "staging:deploy": "yarn staging:clean && TAG=`echo staging-$(date +%Y%m%d-%H%M%S)` && git tag $TAG && git push origin $TAG"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.1",
+    "esm": "^3.2.25",
+    "express": "^4.18.1",
+    "express-promise-router": "^4.1.1",
+    "nnn-router": "^1.1.6",
+    "promise-express-router": "^1.3.0",
+    "statuses": "^2.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.18"
+  }
+}
